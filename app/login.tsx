@@ -116,6 +116,13 @@ export default function LoginScreen() {
         contentContainerStyle={styles.container}
         keyboardShouldPersistTaps="handled"
       >
+        <TouchableOpacity
+          style={styles.backButton}
+          onPress={() => router.back()}
+        >
+          <Ionicons name="arrow-back" size={24} color={Colors.text} />
+        </TouchableOpacity>
+
         <View style={styles.header}>
           <Text style={styles.title}>StudySync</Text>
           <Text style={styles.subtitle}>Find your classmates at JHS</Text>
@@ -210,6 +217,13 @@ export default function LoginScreen() {
 
 const styles = StyleSheet.create({
   flex: { flex: 1, backgroundColor: Colors.background },
+  backButton: {
+    position: 'absolute',
+    top: Spacing.xl,
+    left: Spacing.md,
+    zIndex: 10,
+    padding: Spacing.sm,
+  },
   container: {
     flexGrow: 1,
     justifyContent: 'center',

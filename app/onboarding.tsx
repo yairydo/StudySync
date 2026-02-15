@@ -149,6 +149,13 @@ export default function OnboardingScreen() {
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
     >
       <ScrollView style={styles.container} contentContainerStyle={styles.content}>
+        <TouchableOpacity
+          style={styles.backButton}
+          onPress={() => router.back()}
+        >
+          <Ionicons name="arrow-back" size={24} color={Colors.text} />
+        </TouchableOpacity>
+
         <Text style={styles.heading}>{isEditing ? 'Edit Profile' : 'Welcome to StudySync!'}</Text>
         <Text style={styles.subheading}>
           {isEditing ? 'Update your schedule and profile information.' : 'Set up your schedule to find classmates.'}
@@ -368,6 +375,13 @@ export default function OnboardingScreen() {
 
 const styles = StyleSheet.create({
   flex: { flex: 1 },
+  backButton: {
+    position: 'absolute',
+    top: Spacing.xl,
+    left: Spacing.md,
+    zIndex: 10,
+    padding: Spacing.sm,
+  },
   container: {
     flex: 1,
     backgroundColor: Colors.background,
