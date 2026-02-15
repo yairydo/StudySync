@@ -377,54 +377,63 @@ const styles = StyleSheet.create({
   flex: { flex: 1 },
   backButton: {
     position: 'absolute',
-    top: Spacing.xl,
+    top: 56,  // Safe area + spacing
     left: Spacing.md,
     zIndex: 10,
-    padding: Spacing.sm,
+    padding: Spacing.xs,
+    minWidth: 44,  // Touch target minimum
+    minHeight: 44,
   },
   container: {
     flex: 1,
     backgroundColor: Colors.background,
   },
   content: {
-    padding: Spacing.md,
-    paddingBottom: 60,
+    paddingHorizontal: Spacing.md,  // 16px screen margins
+    paddingTop: 80,  // Space for back button
+    paddingBottom: 120,  // Space for floating tab bar
   },
   heading: {
     fontSize: FontSize.xxl,
     fontFamily: Font.extraBold,
     color: Colors.primary,
     marginBottom: Spacing.xs,
+    lineHeight: FontSize.xxl * 1.2,  // Better line height
   },
   subheading: {
     fontSize: FontSize.md,
     fontFamily: Font.regular,
     color: Colors.textSecondary,
-    marginBottom: Spacing.lg,
+    marginBottom: Spacing.xl,  // More breathing room before content
+    lineHeight: FontSize.md * 1.5,
   },
   section: {
-    marginBottom: Spacing.lg,
+    marginBottom: Spacing.lg,  // 24px between sections
   },
   label: {
     fontSize: FontSize.md,
     fontFamily: Font.semiBold,
     color: Colors.text,
-    marginBottom: Spacing.sm,
+    marginBottom: Spacing.xs,  // Tighter spacing between label and input
+    lineHeight: FontSize.md * 1.4,
   },
   hint: {
-    fontSize: FontSize.xs,
+    fontSize: FontSize.sm,  // Slightly larger for readability
     fontFamily: Font.regular,
     color: Colors.textSecondary,
-    marginBottom: Spacing.sm,
+    marginBottom: Spacing.xs,
+    lineHeight: FontSize.sm * 1.5,
   },
   input: {
     backgroundColor: Colors.surface,
     borderWidth: 1.5,
     borderColor: Colors.border,
-    borderRadius: BorderRadius.sm,
-    padding: Spacing.md,
+    borderRadius: BorderRadius.md,  // Consistent with other elements
+    paddingHorizontal: Spacing.md,  // 16px internal padding
+    paddingVertical: Spacing.sm,    // 12px vertical padding
     fontSize: FontSize.md,
     fontFamily: Font.regular,
+    minHeight: 48,  // Touch target comfortable size
   },
   bioInput: {
     height: 80,
@@ -454,6 +463,8 @@ const styles = StyleSheet.create({
     borderRadius: BorderRadius.md,
     paddingVertical: Spacing.sm,
     alignItems: 'center',
+    minHeight: 44,  // Touch target minimum
+    justifyContent: 'center',
   },
   lunchSelected: {
     borderColor: Colors.primary,
@@ -473,7 +484,9 @@ const styles = StyleSheet.create({
     borderRadius: BorderRadius.md,
     paddingVertical: Spacing.md,
     alignItems: 'center',
-    marginTop: Spacing.md,
+    marginTop: Spacing.xl,  // More breathing room before CTA
+    minHeight: 48,  // Comfortable touch target
+    justifyContent: 'center',
   },
   saveButtonDisabled: {
     opacity: 0.6,
@@ -549,6 +562,8 @@ const styles = StyleSheet.create({
     padding: Spacing.md,
     alignItems: 'center',
     backgroundColor: Colors.surface,
+    minHeight: 80,  // Comfortable touch target for important choice
+    justifyContent: 'center',
   },
   schoolSelected: {
     borderColor: Colors.primary,

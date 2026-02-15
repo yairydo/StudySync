@@ -162,31 +162,35 @@ const styles = StyleSheet.create({
   },
   filterSection: {
     backgroundColor: Colors.surface,
-    paddingBottom: Spacing.sm,
+    paddingBottom: Spacing.md,  // More breathing room
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: Colors.border,
   },
   filterLabel: {
-    fontSize: FontSize.sm,
+    fontSize: FontSize.md,  // Larger for better hierarchy
     fontFamily: Font.semiBold,
     color: Colors.text,
     paddingHorizontal: Spacing.md,
-    paddingTop: Spacing.xl,
-    paddingBottom: Spacing.xs,
+    paddingTop: Spacing.md,  // Consistent spacing
+    paddingBottom: Spacing.sm,
+    lineHeight: FontSize.md * 1.4,
   },
   controls: {
     paddingHorizontal: Spacing.md,
-    gap: Spacing.sm,
+    gap: Spacing.md,  // More space between controls
   },
   switchRow: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    minHeight: 44,  // Touch target minimum
+    paddingVertical: Spacing.xs,
   },
   switchLabel: {
-    fontSize: FontSize.sm,
-    fontFamily: Font.regular,
+    fontSize: FontSize.md,  // Larger for readability
+    fontFamily: Font.medium,
     color: Colors.text,
+    lineHeight: FontSize.md * 1.4,
   },
   schoolRow: {
     flexDirection: 'row',

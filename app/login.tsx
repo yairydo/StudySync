@@ -237,29 +237,34 @@ const styles = StyleSheet.create({
   },
   emailSection: {
     gap: Spacing.sm,
-    marginBottom: Spacing.lg,
+    marginBottom: Spacing.xl,  // More breathing room between sections
   },
   sectionTitle: {
-    fontSize: FontSize.lg,
+    fontSize: FontSize.xl,  // Larger for better hierarchy
     fontFamily: Font.bold,
     color: Colors.text,
-    marginBottom: Spacing.xs,
+    marginBottom: Spacing.sm,
+    lineHeight: FontSize.xl * 1.2,
   },
   input: {
     backgroundColor: Colors.surface,
-    borderWidth: 1,
+    borderWidth: 1.5,  // Slightly thicker border
     borderColor: Colors.border,
-    borderRadius: BorderRadius.sm,
-    padding: Spacing.md,
+    borderRadius: BorderRadius.md,  // Consistent with other elements
+    paddingHorizontal: Spacing.md,  // 16px internal padding
+    paddingVertical: Spacing.sm + 2,  // ~14px vertical padding
     fontSize: FontSize.md,
     fontFamily: Font.regular,
+    minHeight: 48,  // Touch target comfortable size
   },
   emailButton: {
     backgroundColor: Colors.primary,
     borderRadius: BorderRadius.md,
     paddingVertical: Spacing.md,
     alignItems: 'center',
-    marginTop: Spacing.xs,
+    justifyContent: 'center',
+    marginTop: Spacing.sm,
+    minHeight: 48,  // Comfortable touch target
   },
   buttonDisabled: {
     opacity: 0.6,
@@ -305,6 +310,7 @@ const styles = StyleSheet.create({
     gap: Spacing.sm,
     paddingVertical: Spacing.md,
     borderRadius: BorderRadius.md,
+    minHeight: 48,  // Comfortable touch target
   },
   googleButton: {
     backgroundColor: Colors.google,

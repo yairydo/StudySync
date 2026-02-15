@@ -185,25 +185,26 @@ const styles = StyleSheet.create({
   },
   profileHeader: {
     alignItems: 'center',
-    paddingVertical: Spacing.xl,
+    paddingVertical: Spacing.lg,  // More breathing room (24px)
+    paddingHorizontal: Spacing.md,
     backgroundColor: Colors.surface,
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: Colors.border,
   },
   avatar: {
-    width: 72,
-    height: 72,
-    borderRadius: 36,
+    width: 96,  // Larger avatar for better visual hierarchy
+    height: 96,
+    borderRadius: 48,
     backgroundColor: Colors.primary,
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: Spacing.sm,
+    marginBottom: Spacing.md,
     position: 'relative',
   },
   avatarImage: {
-    width: 72,
-    height: 72,
-    borderRadius: 36,
+    width: 96,  // Match new avatar size
+    height: 96,
+    borderRadius: 48,
   },
   avatarText: {
     color: Colors.textOnPrimary,
@@ -352,15 +353,17 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     gap: Spacing.sm,
     backgroundColor: Colors.surface,
-    borderWidth: 1,
+    borderWidth: 1.5,  // Slightly thicker for better visibility
     borderColor: Colors.primary,
     borderRadius: BorderRadius.md,
     paddingVertical: Spacing.md,
+    minHeight: 48,  // Comfortable touch target
   },
   editButtonText: {
     fontSize: FontSize.md,
     fontFamily: Font.semiBold,
     color: Colors.primary,
+    lineHeight: FontSize.md * 1.4,
   },
   signOutButton: {
     flexDirection: 'row',
@@ -368,10 +371,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     gap: Spacing.sm,
     backgroundColor: Colors.surface,
-    borderWidth: 1,
+    borderWidth: 1.5,
     borderColor: Colors.error,
     borderRadius: BorderRadius.md,
     paddingVertical: Spacing.md,
+    minHeight: 48,  // Comfortable touch target
   },
   signOutButtonText: {
     fontSize: FontSize.md,

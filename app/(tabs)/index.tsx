@@ -86,18 +86,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   list: {
-    paddingVertical: Spacing.sm,
+    paddingTop: Spacing.md,
+    paddingBottom: 120,  // Space for floating tab bar
   },
   header: {
-    paddingHorizontal: Spacing.md,
-    paddingTop: Spacing.lg,
-    paddingBottom: Spacing.sm,
+    paddingHorizontal: Spacing.md,  // 16px screen margins
+    paddingTop: Spacing.xs,
+    paddingBottom: Spacing.md,
     marginBottom: Spacing.xs,
   },
   greeting: {
-    fontSize: FontSize.xl,
-    fontFamily: Font.bold,
+    fontSize: FontSize.xxl,  // Larger greeting for better hierarchy
+    fontFamily: Font.extraBold,
     color: Colors.text,
+    lineHeight: FontSize.xxl * 1.2,
   },
   empty: {
     padding: Spacing.xl,

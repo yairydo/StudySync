@@ -38,7 +38,8 @@ const styles = StyleSheet.create({
     borderRadius: BorderRadius.md,
     padding: Spacing.md,
     marginHorizontal: Spacing.md,
-    marginVertical: Spacing.xs,
+    marginBottom: Spacing.sm,  // 12px between cards
+    minHeight: 80,  // Comfortable touch target
     shadowColor: Colors.primary,
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.08,
@@ -67,12 +68,14 @@ const styles = StyleSheet.create({
     fontSize: FontSize.md,
     fontFamily: Font.semiBold,
     color: Colors.text,
+    lineHeight: FontSize.md * 1.4,
   },
   teacher: {
     fontSize: FontSize.sm,
     fontFamily: Font.regular,
     color: Colors.textSecondary,
-    marginTop: 3,
+    marginTop: Spacing.xs / 2,  // 4px spacing
+    lineHeight: FontSize.sm * 1.5,
   },
   countContainer: {
     flexDirection: 'row',
