@@ -377,8 +377,8 @@ const styles = StyleSheet.create({
   flex: { flex: 1 },
   backButton: {
     position: 'absolute',
-    top: 56,  // Safe area + spacing
-    left: Spacing.md,
+    top: 48,  // Higher up, closer to top
+    left: Spacing.xs,  // More to the left
     zIndex: 10,
     padding: Spacing.xs,
     minWidth: 44,  // Touch target minimum
