@@ -20,6 +20,7 @@ import ScheduleBuilder from '../components/ScheduleBuilder';
 import { useAuth } from '../contexts/AuthContext';
 import { saveUserProfile, ScheduleEntry } from '../lib/store';
 import { pickImage, uploadProfilePicture } from '../lib/imageUpload';
+import { signOut } from '../lib/auth';
 
 export default function OnboardingScreen() {
   const router = useRouter();
@@ -158,18 +159,12 @@ export default function OnboardingScreen() {
   };
 
   return (
-    <KeyboardAvoidingView
-      style={styles.flex}
-      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-    >
-      <ScrollView style={styles.container} contentContainerStyle={styles.content}>
-        <TouchableOpacity
-          style={styles.backButton}
-          onPress={() => router.back()}
-        >
-          <Ionicons name="arrow-back" size={24} color={Colors.text} />
-        </TouchableOpacity>
-
+    <View style={styles.flex}>
+      <KeyboardAvoidingView
+        style={styles.flex}
+        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+      >
+        <ScrollView style={styles.container} contentContainerStyle={styles.content}>
         <Text style={styles.heading}>{isEditing ? 'Edit Profile' : 'Welcome to StudySync!'}</Text>
         <Text style={styles.subheading}>
           {isEditing ? 'Update your schedule and profile information.' : 'Set up your schedule to find classmates.'}
@@ -383,29 +378,51 @@ export default function OnboardingScreen() {
           )}
         </TouchableOpacity>
       </ScrollView>
-    </KeyboardAvoidingView>
+      </KeyboardAvoidingView>
+      
+      <TouchableOpacity
+        style={styles.backButton}
+        onPress={async () => {
+          try {
+            await signOut();
+            router.replace('/login');
+          } catch (error) {
+            console.error('Sign out error:', error);
+            alert('Error signing out: ' + error);
+          }
+        }}
+        activeOpacity={0.7}
+        hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+      >
+        <Ionicons name="arrow-back" size={24} color={Colors.text} />
+      </TouchableOpacity>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  flex: { flex: 1 },
-  backButton: {
-    position: 'absolute',
-    top: 48,  // Higher up, closer to top
-    left: Spacing.xs,  // More to the left
-    zIndex: 10,
-    padding: Spacing.xs,
-    minWidth: 44,  // Touch target minimum
-    minHeight: 44,
-  },
-  container: {
+  flex: { 
     flex: 1,
     backgroundColor: Colors.background,
   },
+  backButton: {
+    position: 'absolute',
+    top: Platform.OS === 'ios' ? 60 : 48,
+    left: Spacing.xs,
+    zIndex: 9999,
+    padding: Spacing.xs,
+    minWidth: 44,
+    minHeight: 44,
+    backgroundColor: Colors.background,
+    borderRadius: BorderRadius.full,
+  },
+  container: {
+    flex: 1,
+  },
   content: {
-    paddingHorizontal: Spacing.md,  // 16px screen margins
-    paddingTop: 80,  // Space for back button
-    paddingBottom: 120,  // Space for floating tab bar
+    paddingHorizontal: Spacing.md,
+    paddingTop: 100,
+    paddingBottom: 120,
   },
   heading: {
     fontSize: FontSize.xxl,
