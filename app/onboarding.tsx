@@ -42,9 +42,15 @@ export default function OnboardingScreen() {
   const [saving, setSaving] = useState(false);
   const [loaded, setLoaded] = useState(false);
 
-  // Load existing profile data when editing
+  // Load existing profile data when editing, or initialize with Google photo for new users
   useEffect(() => {
+    console.log('🔍 Onboarding useEffect - user:', user?.uid);
+    console.log('🔍 user.photoURL:', user?.photoURL);
+    console.log('🔍 profile exists:', !!profile);
+    console.log('🔍 loaded:', loaded);
+    
     if (profile && !loaded) {
+      console.log('📝 Loading existing profile data');
       setDisplayName(profile.displayName || '');
       setSchool(profile.school || 'jhs');
       setBio(profile.bio || '');
@@ -58,8 +64,16 @@ export default function OnboardingScreen() {
       setOtherLinks(profile.contacts?.other || []);
       setProfilePicture(profile.profilePicture || null);
       setLoaded(true);
+    } else if (!profile && !loaded && user?.photoURL) {
+      // New user with Google photo - initialize with it
+      console.log('✅ Setting Google photo URL:', user.photoURL);
+      setProfilePicture(user.photoURL);
+      setLoaded(true);
+    } else if (!profile && !loaded && user) {
+      console.log('⚠️ User exists but no photoURL available');
+      setLoaded(true);
     }
-  }, [profile, loaded]);
+  }, [profile, loaded, user]);
 
   const handlePickImage = async () => {
     const uri = await pickImage();
@@ -114,8 +128,8 @@ export default function OnboardingScreen() {
         } finally {
           setUploading(false);
         }
-      } else if (profilePicture && profilePicture.startsWith('https://')) {
-        // Keep existing Firebase URL
+      } else if (profilePicture) {
+        // Keep existing Firebase URL or Google photo URL
         profilePictureUrl = profilePicture;
       }
 

@@ -17,6 +17,7 @@ import { Colors, Spacing, FontSize, BorderRadius, Font } from '../constants/them
 import {
   signUpWithEmail,
   signInWithEmail,
+  signInWithGoogleWeb,
   useGoogleAuth,
   exchangeGoogleCode,
   useMicrosoftAuth,
@@ -28,7 +29,7 @@ import { isDeveloper, getDevMode } from '../lib/devSettings';
 export default function LoginScreen() {
   const router = useRouter();
   const { user, profile } = useAuth();
-  const google = useGoogleAuth();
+  const google = Platform.OS === 'web' ? null : useGoogleAuth();
   const microsoft = useMicrosoftAuth();
 
   const [email, setEmail] = useState('');
@@ -50,7 +51,8 @@ export default function LoginScreen() {
   }, [user, profile]);
 
   useEffect(() => {
-    if (google.response?.type === 'success' && google.discovery) {
+    // Only for mobile - web uses signInWithPopup directly
+    if (Platform.OS !== 'web' && google?.response?.type === 'success' && google.discovery) {
       const code = google.response.params?.code;
       const codeVerifier = google.request?.codeVerifier;
       if (code && codeVerifier) {
@@ -63,7 +65,7 @@ export default function LoginScreen() {
           });
       }
     }
-  }, [google.response]);
+  }, [google?.response]);
 
   useEffect(() => {
     if (microsoft.response?.type === 'success') {
@@ -71,6 +73,22 @@ export default function LoginScreen() {
       signInWithMicrosoft(access_token).catch(console.error);
     }
   }, [microsoft.response]);
+
+  const handleGoogleSignIn = async () => {
+    if (Platform.OS === 'web') {
+      setLoading(true);
+      try {
+        await signInWithGoogleWeb();
+      } catch (e: any) {
+        console.error('Google sign-in error:', e);
+        Alert.alert('Error', 'Google sign-in failed. Please try again.');
+      } finally {
+        setLoading(false);
+      }
+    } else {
+      google?.promptAsync();
+    }
+  };
 
   const handleEmailAuth = async () => {
     if (!email.trim() || !password.trim()) {
@@ -183,8 +201,8 @@ export default function LoginScreen() {
         <View style={styles.oauthButtons}>
           <TouchableOpacity
             style={[styles.oauthButton, styles.googleButton]}
-            onPress={() => google.promptAsync()}
-            disabled={!google.request || loading}
+            onPress={handleGoogleSignIn}
+            disabled={(Platform.OS !== 'web' && !google?.request) || loading}
           >
             <Ionicons name="logo-google" size={20} color="#fff" />
             <Text style={styles.oauthButtonText}>Google</Text>

@@ -2,11 +2,13 @@ import {
   GoogleAuthProvider,
   OAuthProvider,
   signInWithCredential,
+  signInWithPopup,
   signOut as firebaseSignOut,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
 } from 'firebase/auth';
 import { auth } from './firebase';
+import { Platform } from 'react-native';
 import * as AuthSession from 'expo-auth-session';
 import * as WebBrowser from 'expo-web-browser';
 
@@ -24,15 +26,20 @@ export async function signInWithEmail(email: string, password: string) {
 // Google sign-in
 const GOOGLE_WEB_CLIENT_ID = '791614950917-105hripd9o12s5ut3s4d4m9o8k32j19l.apps.googleusercontent.com';
 
+// Web-specific: Use Firebase's signInWithPopup
+export async function signInWithGoogleWeb() {
+  const provider = new GoogleAuthProvider();
+  provider.addScope('profile');
+  provider.addScope('email');
+  return signInWithPopup(auth, provider);
+}
+
+// Mobile-specific: Use Expo AuthSession
 export function useGoogleAuth() {
   const discovery = AuthSession.useAutoDiscovery('https://accounts.google.com');
-  // Use Expo's auth proxy for a valid HTTPS redirect URI
   const redirectUri = AuthSession.makeRedirectUri({
     useProxy: true,
   });
-
-  // DEBUG: Log the redirect URI
-  console.log('🔍 Google OAuth Redirect URI:', redirectUri);
 
   const [request, response, promptAsync] = AuthSession.useAuthRequest(
     {
