@@ -15,7 +15,10 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.studysync.app"
+      "bundleIdentifier": "com.studysync.app",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -23,7 +26,10 @@
         "backgroundColor": "#E34234"
       },
       "edgeToEdgeEnabled": true,
-      "package": "com.studysync.app"
+      "package": "com.studysync.app",
+      "permissions": [
+        "android.permission.RECORD_AUDIO"
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png",
@@ -39,6 +45,12 @@
           "photosPermission": "The app needs access to your photos to let you upload a profile picture."
         }
       ]
-    ]
+    ],
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "cac8528f-61aa-449b-a788-f0572025da41"
+      }
+    }
   }
 }
