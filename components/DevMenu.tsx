@@ -59,8 +59,8 @@ export default function DevMenu() {
     Alert.alert(
       'Dev Mode ' + (newValue ? 'Enabled' : 'Disabled'),
       newValue
-        ? 'Developer features are now active. Reload the app to see changes.'
-        : 'Developer features are now disabled.',
+        ? 'Auto-redirects are now disabled. You can test login/onboarding screens.'
+        : 'Auto-redirects are now enabled. Screens will behave normally.',
       [{ text: 'OK' }]
     );
   };

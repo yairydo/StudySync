@@ -23,8 +23,10 @@ function AuthGate({ children }: { children: React.ReactNode }) {
 
       // Skip auto-navigation if developer has dev mode enabled
       if (isDevMode) {
+        console.log('🔧 Dev mode ON - skipping auto-navigation in AuthGate');
         return;
       }
+      console.log('🔀 Dev mode OFF - AuthGate will auto-navigate if needed');
 
       const inAuthGroup = segments[0] === 'login';
       const inOnboarding = segments[0] === 'onboarding';

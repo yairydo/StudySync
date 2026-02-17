@@ -11,7 +11,7 @@ import {
   Platform,
   ScrollView,
 } from 'react-native';
-import { useRouter } from 'expo-router';
+import { useRouter, useFocusEffect } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { Colors, Spacing, FontSize, BorderRadius, Font } from '../constants/theme';
 import {
@@ -37,18 +37,25 @@ export default function LoginScreen() {
   const [isSignUp, setIsSignUp] = useState(true);
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    const checkAndRedirect = async () => {
-      // Don't redirect if dev mode is enabled
-      const isDevMode = isDeveloper(profile?.displayName) && await getDevMode();
-      if (isDevMode) return;
+  // Re-check dev mode every time screen comes into focus
+  useFocusEffect(
+    React.useCallback(() => {
+      const checkAndRedirect = async () => {
+        // Don't redirect if dev mode is enabled
+        const isDevMode = isDeveloper(profile?.displayName) && await getDevMode();
+        if (isDevMode) {
+          console.log('🔧 Dev mode ON - skipping redirect from login');
+          return;
+        }
 
-      if (user) {
-        router.replace('/');
-      }
-    };
-    checkAndRedirect();
-  }, [user, profile]);
+        if (user) {
+          console.log('🔀 Dev mode OFF - redirecting from login to app');
+          router.replace('/');
+        }
+      };
+      checkAndRedirect();
+    }, [user, profile, router])
+  );
 
   useEffect(() => {
     // Only for mobile - web uses signInWithPopup directly
